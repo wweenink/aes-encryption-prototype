@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
+import { EncryptDecryptService } from '../services/encrypt.decrypt.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { HomePage } from './home.page';
       }
     ])
   ],
+  providers: [EncryptDecryptService],
   declarations: [HomePage]
 })
 export class HomePageModule {}
