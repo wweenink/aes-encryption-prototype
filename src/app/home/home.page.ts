@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EncryptDecryptService } from '../services/encrypt.decrypt.service';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +13,13 @@ export class HomePage {
   public encrypted;
   public decrypted;
 
+  
   ngOnInit() {
-    var key = "123456$#@$^@1ERF"
-    var message = "Dit bericht is geheim !@#$%^&*() 0123456789 -=[];',./_+{}:|<>?"
-    this.encrypted = this.EncrDecr.encrypt(key, message);
-    this.decrypted = this.EncrDecr.decrypt(key, this.encrypted);
+    var key = CryptoJS.lib.WordArray.random(128/8);
+    var iv = CryptoJS.lib.WordArray.random(128/8);  
+  
+    var message = "Dit is geheim !@#$%^&*() 0123456789"
+    this.encrypted = this.EncrDecr.encrypt(key, iv, message);
+    this.decrypted = this.EncrDecr.decrypt(key, iv, this.encrypted);
     }
 }
